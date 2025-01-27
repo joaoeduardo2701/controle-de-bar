@@ -24,7 +24,7 @@ public class RepositorioMesaEmOrm : IRepositorioMesa
             return false;
 
         registroOriginal.AtualizarInformacoes(registroAtualizado);
-
+        
         dbContext.Mesas.Update(registroOriginal);
 
         dbContext.SaveChanges();

@@ -11,6 +11,7 @@ public class ControleDeBarDbContext : DbContext
     public DbSet<Garcom> Garcons { get; set; }
     public DbSet<Produto> Produtos { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
+    public DbSet<Conta> Contas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -90,6 +91,52 @@ public class ControleDeBarDbContext : DbContext
             pedidoBuilder.HasOne(p => p.Produto)
             .WithMany()
             .HasForeignKey("Produto_Id")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
+        });
+
+        modelBuilder.Entity<Conta>(contaBuilder =>
+        {
+            contaBuilder.ToTable("TBConta");
+
+            contaBuilder.Property(c => c.Id)
+            .IsRequired()
+            .ValueGeneratedOnAdd();
+
+            contaBuilder.Property(c => c.Titular)
+            .IsRequired()
+            .HasColumnType("varchar(2000)");
+
+            contaBuilder.Property(c => c.Abertura)
+            .IsRequired()
+            .HasColumnType("datetime2");
+
+            contaBuilder.Property(c => c.Fechamento)
+            .IsRequired()
+            .HasColumnType("datetime2");
+
+            contaBuilder.Property(c => c.EstaAberta)
+            .IsRequired()
+            .HasColumnType("bit");
+
+            contaBuilder.HasOne(c => c.Mesa)
+            .WithMany()
+            .HasForeignKey("Mesa_Id")
+            .HasConstraintName("FK_TBConta_TBMesa")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
+
+            contaBuilder.HasOne(c => c.Garcom)
+            .WithMany()
+            .HasForeignKey("Garcom_Id")
+            .HasConstraintName("FK_TBConta_TBGarcom")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
+
+            contaBuilder.HasMany(c => c.Pedidos)
+            .WithOne()
+            .HasForeignKey("Conta_Id")
+            .HasConstraintName("FK_TBConta_TBPedido")
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
         });

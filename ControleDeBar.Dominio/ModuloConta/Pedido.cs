@@ -3,7 +3,7 @@
 namespace ControleDeBar.Dominio.ModuloConta;
 public class Pedido
 {
-    public int id { get; set; }
+    public int Id { get; set; }
     public Produto Produto { get; set; }
     public int QuantidadeSolicitada { get; set; }
 

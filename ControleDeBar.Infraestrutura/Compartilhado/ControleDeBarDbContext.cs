@@ -1,4 +1,5 @@
-﻿using ControleDeBar.Dominio.ModuloGarcom;
+﻿using ControleDeBar.Dominio.ModuloConta;
+using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.Dominio.ModuloProduto;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ public class ControleDeBarDbContext : DbContext
     public DbSet<Mesa> Mesas { get; set; }
     public DbSet<Garcom> Garcons { get; set; }
     public DbSet<Produto> Produtos { get; set; }
+    public DbSet<Pedido> Pedidos { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -71,6 +73,25 @@ public class ControleDeBarDbContext : DbContext
             produtoBuilder.Property(p => p.Valor)
             .IsRequired()
             .HasColumnType("decimal(18,2)");
+        });
+
+        modelBuilder.Entity<Pedido>(pedidoBuilder =>
+        {
+            pedidoBuilder.ToTable("TBPedido");
+
+            pedidoBuilder.Property(p => p.Id)
+            .IsRequired()
+            .ValueGeneratedOnAdd();
+
+            pedidoBuilder.Property(p => p.QuantidadeSolicitada)
+            .IsRequired()
+            .HasColumnType("int");
+
+            pedidoBuilder.HasOne(p => p.Produto)
+            .WithMany()
+            .HasForeignKey("Produto_Id")
+            .IsRequired()
+            .OnDelete(DeleteBehavior.Restrict);
         });
 
         base.OnModelCreating(modelBuilder);

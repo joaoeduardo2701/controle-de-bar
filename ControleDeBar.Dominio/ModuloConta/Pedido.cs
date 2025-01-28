@@ -9,14 +9,13 @@ public class Pedido
 
     public Pedido() { }
 
-    public Pedido(int id, Produto produto, int quantidadeSolicitada)
+    public Pedido(Produto produto, int quantidadeSolicitada)
     {
-        this.id = id;
         Produto = produto;
         QuantidadeSolicitada = quantidadeSolicitada;
     }
 
-    public decimal CalculaTotalParcial()
+    public decimal CalcularTotalParcial()
     {
         return Produto.Valor * QuantidadeSolicitada;
     }

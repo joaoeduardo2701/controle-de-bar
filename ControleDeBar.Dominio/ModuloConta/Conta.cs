@@ -33,7 +33,8 @@ public class Conta : EntidadeBase
         EstaAberta = true;
         Abertura = DateTime.Now;
 
-        Mesa.Ocupar();
+        if (Mesa != null) 
+            Mesa.Ocupar();
     }
 
     public void Fechar()
@@ -76,13 +77,12 @@ public class Conta : EntidadeBase
     {
         List<string> erros = new List<string>();
 
-        if (string.IsNullOrEmpty(Titular))
-            erros.Add("O campo \"TITULAR\" é obrigatório");
+        if (Titular.Length <= 3)
+            erros.Add("O campo \"Titular\" é obrigatório");
         if (Garcom == null)
-            erros.Add("O campo \"GARÇOM\" é obrigatorio");
-
+            erros.Add("O campo \"Garçom\" é obrigatorio");
         if (Mesa == null)
-            erros.Add("O campo \"MESA\" é obrigatorio");
+            erros.Add("O campo \"Mesa\" é obrigatorio");
 
         return erros;
     }

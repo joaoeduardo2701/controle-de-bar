@@ -8,10 +8,10 @@ public class Garcom : EntidadeBase
 
     public Garcom () { }
 
-    public Garcom(string nome, string cPF)
+    public Garcom(string nome, string cpf)
     {
         Nome = nome;
-        CPF = cPF;
+        CPF = cpf;
     }
 
     public override void AtualizarInformacoes(EntidadeBase registroAtualizado)

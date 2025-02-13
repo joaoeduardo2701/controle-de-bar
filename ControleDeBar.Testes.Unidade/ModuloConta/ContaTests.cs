@@ -3,7 +3,7 @@ using ControleDeBar.Dominio.ModuloGarcom;
 using ControleDeBar.Dominio.ModuloMesa;
 using ControleDeBar.Dominio.ModuloProduto;
 
-namespace ControleDeBar.Testes.Unidade;
+namespace ControleDeBar.Testes.Unidade.ModuloConta;
 
 [TestClass]
 [TestCategory("Testes de Unidade - Conta")]

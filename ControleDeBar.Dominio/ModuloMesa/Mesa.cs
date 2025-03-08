@@ -40,4 +40,9 @@ public class Mesa : EntidadeBase
 
         return erros;
     }
+
+    public override string ToString()
+    {
+        return Numero;
+    }
 }

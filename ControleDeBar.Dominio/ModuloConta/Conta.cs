@@ -86,4 +86,9 @@ public class Conta : EntidadeBase
 
         return erros;
     }
+
+    public override string ToString()
+    {
+        return Titular;
+    }
 }

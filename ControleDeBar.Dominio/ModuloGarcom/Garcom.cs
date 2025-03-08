@@ -33,4 +33,9 @@ public class Garcom : EntidadeBase
 
         return erros;
     }
+
+    public override string ToString()
+    {
+        return Nome;
+    }
 }

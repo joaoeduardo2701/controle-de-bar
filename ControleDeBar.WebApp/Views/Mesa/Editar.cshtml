@@ -1,0 +1,27 @@
+﻿@{
+    var mesa = ViewBag.Mesa;
+}
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Editar Mesa</title>
+</head>
+<body>
+    <h1>Editar Mesa</h1>
+
+    <form action="/mesa/editar/@mesa.Id" method="post">
+        <label>Número da Mesa:</label> 
+        <br />
+        <input type="text" name="numero" value="@mesa.Numero"/>
+        <br />
+        <input name="ocupada" type="checkbox" @(mesa.Ocupada ? "checked" : "") />
+        <label> Ocupada</label>
+        <br />
+        <button>Gravar</button>
+    </form>
+
+    <a href="/mesa/listar">Listar Mesas</a>
+</body>
+</html>

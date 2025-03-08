@@ -7,7 +7,7 @@ namespace ControleDeBar.WebApp.Controllers
 {
     public class MesaController : Controller
     {
-        public ViewResult Listar()
+        public IActionResult Listar()
         {
             ControleDeBarDbContext db = new ControleDeBarDbContext();
             IRepositorioMesa repositorioMesa = new RepositorioMesaEmOrm(db);
@@ -19,13 +19,13 @@ namespace ControleDeBar.WebApp.Controllers
             return View();
         }
 
-        public ViewResult Inserir()
+        public IActionResult Inserir()
         {
             return View();
         }
 
         [HttpPost]
-        public ViewResult Inserir(Mesa novaMesa)
+        public IActionResult Inserir(Mesa novaMesa)
         {
             ControleDeBarDbContext db = new ControleDeBarDbContext();
             IRepositorioMesa repositorioMesa = new RepositorioMesaEmOrm(db);
@@ -36,10 +36,10 @@ namespace ControleDeBar.WebApp.Controllers
 
             ViewBag.Mensagem = $"O registro com o ID {novaMesa.Id} foi cadastrado com sucesso!";
 
-            return View("listar");
+            return RedirectToAction("Listar");
         }
 
-        public ViewResult Editar(int id)
+        public IActionResult Editar(int id)
         {
             ControleDeBarDbContext db = new ControleDeBarDbContext();
             IRepositorioMesa repositorioMesa = new RepositorioMesaEmOrm(db);
@@ -48,11 +48,11 @@ namespace ControleDeBar.WebApp.Controllers
 
             ViewBag.Mesa = mesa;
 
-            return View("mensagens");
+            return View();
         }
 
         [HttpPost]
-        public ViewResult Editar(int id, Mesa mesaAtualizada)
+        public IActionResult Editar(int id, Mesa mesaAtualizada)
         {
             ControleDeBarDbContext db = new ControleDeBarDbContext();
             IRepositorioMesa repositorioMesa = new RepositorioMesaEmOrm(db);
@@ -69,7 +69,7 @@ namespace ControleDeBar.WebApp.Controllers
             return View("mensagens");
         }
 
-        public ViewResult Excluir(int id)
+        public IActionResult Excluir(int id)
         {
             ControleDeBarDbContext db = new ControleDeBarDbContext();
             IRepositorioMesa repositorioMesa = new RepositorioMesaEmOrm(db);
@@ -82,7 +82,7 @@ namespace ControleDeBar.WebApp.Controllers
         }
 
         [HttpPost, ActionName("excluir")]
-        public ViewResult ExcluirConfirmado(int id)
+        public IActionResult ExcluirConfirmado(int id)
         {
             ControleDeBarDbContext db = new ControleDeBarDbContext();
             IRepositorioMesa repositorioMesa = new RepositorioMesaEmOrm(db);
@@ -96,7 +96,7 @@ namespace ControleDeBar.WebApp.Controllers
             return View("mensagens");
         }
 
-        public ViewResult Detalhes(int id)
+        public IActionResult Detalhes(int id)
         {
             ControleDeBarDbContext db = new ControleDeBarDbContext();
             IRepositorioMesa repositorioMesa = new RepositorioMesaEmOrm(db);
